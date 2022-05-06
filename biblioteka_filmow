@@ -1,0 +1,97 @@
+class Film:
+  
+    def __init__(self, tytul, rok, gatunek, licz_odt):
+      self.tytul = tytul
+      self.rok = rok
+      self.gatunek = gatunek
+      self.licz_odt = licz_odt
+
+      licz_odt = int(licz_odt)
+
+    def play(self, step=1):
+      self.licz_odt += step
+   
+    def __str__(self):
+      return f'"{self.tytul} ({self.rok})"'
+
+    def nazwa_bib():
+      print("-------------BIBLIOTEKA FILMÓW----------------")
+    nazwa_bib()
+
+         
+film_a = Film("Dummers", "2008", "komedia", 55)
+film_b = Film("Mickey", "2018", "animowany", 12)
+film_c = Film("Flights", "1986", "dramat", 16)
+film_d = Film("More and less", "2002", "psychologiczny", 5)
+film_e = Film("Not enought", "1975", "komedia", 41)
+
+film_a.play()
+print("\nZwiększona liczba odtworzeń wybranego filmu:", film_a.licz_odt)
+
+def get_movies():
+  films = [film_a, film_b, film_c, film_d, film_e]
+  get_movies = sorted(films, key=lambda film: film.tytul)
+  print("\nFilmy posortowane po tytule:\n")
+  for i in get_movies:
+    print(i)
+get_movies()
+
+
+class Serial(Film):
+      
+    def __init__(self,  nr_odc, nr_sez, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+      self.nr_odc = nr_odc
+      self.nr_sez = nr_sez
+
+    def __str__(self):
+      return f'"{self.tytul} E{self.nr_odc}S{self.nr_sez}"'
+     
+    
+serial_a = Serial("03", "05", "Dynastia", "1989", "obyczajowy", 132)
+serial_b = Serial("43", "02", "Friends", "1997", "komedia", 43)
+serial_c = Serial("88", "11", "Klan", "2001", "obyczajowy", 52)
+serial_d = Serial("05", "01", "Chyłka", "2018", "dramat", 27)
+serial_e = Serial("76", "04", "Wyścig szczurów", "1995", "sf", 13)
+series = [serial_a, serial_b, serial_c, serial_d, serial_e]
+
+serial_a.play()
+print("\nZwiększona liczba odtworzeń wybranego serialu:", serial_a.licz_odt)
+
+def get_series():
+  get_series = sorted(series, key=lambda serie: serie.tytul)
+  print("\nSeriale posortowane po tytule:\n")
+  for i in get_series:
+    print(i)
+get_series()
+
+lists = [film_a, film_b, film_c, film_d, film_e, serial_a, serial_b, serial_c, serial_d, serial_e]
+by_tytul = sorted(lists, key=lambda list: list.tytul)
+by_licz_odt = sorted(lists, key=lambda list: list.licz_odt)
+
+print("\nWszystkie elementy biblioteki posortowane po tytule:\n")
+for i in by_tytul:
+   print(i)
+
+print("\nLosowo wybrany element z ilością odtworzeń (zakres od 1 do 100):\n")
+
+def generate_views():
+  losowa_lista = list(lists)
+  import random
+  random.shuffle(losowa_lista)
+  for i in losowa_lista[0:1]:
+    print(i, "; losowa ilość odtworzeń: ", random.randrange(1, 100))
+generate_views()
+
+def today_date():
+  import datetime
+  now=datetime.date.today()
+  t=now.strftime('%d.%m.%Y')
+  print("\nTop 3 filmy i seriale dnia", t, ":\n")
+today_date()
+
+def top_titles():
+  new_naj = list(by_licz_odt)
+  for i in reversed(new_naj[-3:]):
+    print(i)
+top_titles()

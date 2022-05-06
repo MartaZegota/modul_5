@@ -1,0 +1,62 @@
+class BaseContact:
+  
+    def __init__(self, imie, nazwisko, tel, mail):
+      self.imie = imie
+      self.nazwisko = nazwisko
+      self.tel = tel
+      self.mail = mail
+      self.label_lenght = len(self.imie) + len(self.nazwisko)
+      
+    print("Podstawowe dane:\n")
+
+    def contact(self):
+      return f'Wybieram nr {self.tel} i dzwonię do {self.imie} {self.nazwisko}; [{self.label_lenght} znaków]'
+
+card_blue = BaseContact("Jan", "Nowakowski", "+48 567 324 654", "jan.nowakowski@bahamy.pl")
+card_pink = BaseContact("Monik", "Sadowski", "+33 432 654 345", "monik_sadowski@sedesy.com")
+card_red = BaseContact("Janina", "Lipowska", "+40 543 654 342", "jlipowska@bbh.pl")
+card_black = BaseContact("Stef", "Rozanska", "+32 765 322 32", "stefrozanska@kwiaty.com")
+card_green = BaseContact("Daniel", "Ster", "+37 654 876 234", "d.ster@sprzety.serwis.pl")
+
+print(card_blue.contact())
+print(card_pink.contact())
+print(card_red.contact())
+print(card_black.contact())
+print(card_green.contact())
+
+class BusinessContact(BaseContact):
+
+    def __init__(self, stanowisko, firma, nr_job, *args, **kwargs):
+      super().__init__(*args, **kwargs)
+      self.stanowisko = stanowisko
+      self.firma = firma
+      self.nr_job = nr_job
+
+    print("\nBiznesowe dane:\n")
+  
+    def contact(self):
+      return f'Wybieram nr {self.nr_job} i dzwonię do {self.imie} {self.nazwisko}; [{self.label_lenght} znaków]'
+      
+card_blue = BusinessContact("prezes", "Bahamy", "(22) 987 34 23", "Jan", "Nowakowski", "+48 567 324 654", "jan.nowakowski@bahamy.pl")
+card_pink = BusinessContact("kierownik", "Sedesy", "(12 342 32 21)", "Monik", "Sadowski", "+33 432 654 345", "monik_sadowski@sedesy.com")
+card_red = BusinessContact("specjalista", "BBH", "(32 456 54 55", "Janina", "Lipowska", "+40 543 654 342", "jlipowska@bbh.pl")
+card_black = BusinessContact("dyrektor", "Kwiaty", "(34 44 54 211", "Stef", "Rozanska", "+32 765 322 32", "stefrozanska@kwiaty.com")
+card_green = BusinessContact("asystent", "Sprzety.pl", "(33 45 345 23)", "Daniel", "Ster", "+37 654 876 234", "d.ster@sprzety.serwis.pl")
+
+print(card_blue.contact())
+print(card_pink.contact())
+print(card_red.contact())
+print(card_black.contact())
+print(card_green.contact())
+
+
+def create_contacts(typ, amount):
+  typ = 'business cards'
+  amount = 10
+
+print('\nBusiness cards (losowe wizytowki):\n')
+
+from faker import Faker
+fake = Faker('pl_PL')
+for _ in range(10):
+  print(fake.address() + fake.name())
